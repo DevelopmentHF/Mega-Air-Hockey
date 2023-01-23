@@ -42,28 +42,7 @@ local paddleRadius  = 25
 
 local puck
 
---Ability to move the ship
-local function dragPuck(event)
-    local puck = event.target
-    local phase = event.phase
 
-    if ("began" == phase) then
-        -- Sets touch focus on the ship
-        display.currentStage:setFocus(puck)
-        -- Store initial offset position; wont be tapped directly in the middle
-        puck.touchOffsetX = event.x - puck.x
-		puck.touchOffsetY = event.y - puck.y
-    elseif ("moved" == phase) then 
-        -- Move the ship to the new touch position
-        puck.x = puck.x - puck.touchOffsetX
-		puck.y = puck.y - puck.touchOffsetY
-    elseif ("ended "== phase or "cancelled" == phase) then 
-        -- Release touch focus 
-        display.currentStage:setFocus(nil)
-    end
-
-    return true -- prevents touch propogation to underlying objects
-end
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
 -- -----------------------------------------------------------------------------------
