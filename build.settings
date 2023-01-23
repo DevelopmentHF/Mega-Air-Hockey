@@ -13,6 +13,11 @@ settings =
 		supported = { "portrait", },
 	},
 
+	android = {
+		splashScreen = 
+		{enable=true, image="splash.png"},
+	},
+
 	--
 	-- Android section
 	--

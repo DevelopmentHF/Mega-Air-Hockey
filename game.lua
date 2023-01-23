@@ -83,6 +83,8 @@ function scene:create( event )
 	uiGroup = display.newGroup() -- display group for UI objects like score
 	sceneGroup:insert(uiGroup)
 
+		-- add to all corners, change to bg colour. stops ball gettings stuck in corenr
+	local body = display.newRect(backGroup,display.screenOriginX, display.screenOriginY, 20, 20 )
 	-- Add background to scene
 	local background = display.newImageRect(backGroup, "assets/background.png", 320, 480)
 	background.x = display.contentCenterX
@@ -118,6 +120,8 @@ function scene:create( event )
 	puck.x = display.contentCenterX
 	puck.y = display.contentCenterY
 	physics.addBody(puck, "dynamic", {radius=16})
+	puck.linearDamping = 1.1
+	puck.isBullet = true
 
 	puck.touch = dragger
 	puck:addEventListener("touch")	
@@ -130,6 +134,7 @@ function scene:create( event )
 	paddle.touch = dragger
 	paddle:addEventListener("touch")	
 
+	physics.addBody(body, "static")
 	-- Add and enterFrame Listener to help limit movement
 function paddle.enterFrame( self )
 	if (self.x < minX + paddleRadius) then self.x = minX end
